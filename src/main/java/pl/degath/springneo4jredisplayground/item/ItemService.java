@@ -1,5 +1,6 @@
 package pl.degath.springneo4jredisplayground.item;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import pl.degath.springneo4jredisplayground.item.infrastructure.ItemAPI;
 import pl.degath.springneo4jredisplayground.item.infrastructure.ItemRepository;
@@ -32,6 +33,7 @@ public class ItemService implements ItemAPI {
     }
 
     @Override
+    @Cacheable(value = "itemCache")
     public Item getByName(String name) {
         return itemRepository.findByName(name)
                 .orElseThrow();
